@@ -1,0 +1,32 @@
+<?php
+
+function connection()
+{
+	$link = mysqli_connect("localhost", "root", "school", "fyp");
+
+	/* check connection */
+	if (mysqli_connect_errno()) {
+   		 printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+	}
+	
+	return $link;
+}
+
+function close()
+{
+	$link = mysqli_connect("localhost", "root", "school", "fyp");
+
+	mysqli_close($link);
+}
+
+
+/* return name of current default database */
+/* if ($result = mysqli_query($link, "SELECT DATABASE()")) {
+    $row = mysqli_fetch_row($result);
+    printf("Default database is %s.\n", $row[0]);
+    mysqli_free_result($result);
+}
+echo "Connected successfully"; */
+//mysqli_close($link);
+?>
