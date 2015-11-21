@@ -1,0 +1,42 @@
+<?php
+include("connect_to_mysql.php");
+//Error Reporting
+error_reporting(E_ALL);
+ini_set('display_errors','1');
+
+
+/*if(!isset($_SESSION["regid"]) || empty($_SESSION["regid"])){
+	header("Location: login.php"); // Redirecting To Login Page
+}*/
+
+$link = connection();
+
+//this will parse the form data and add appointment to the database.
+  
+  function InsertUser (){
+	  global $link;
+	  
+	 if (isset($_POST["submit"])) {
+		 
+		$fullName = mysqli_real_escape_string($link, $_POST["fName"]);
+		$email = mysqli_real_escape_string($link, $_POST["email"]);
+		$mobile = mysqli_real_escape_string($link, $_POST["phone"]);
+		$service = mysqli_real_escape_string($link, $_POST["service"]);
+		$date = mysqli_real_escape_string($link, $_POST["dateFrom"]);
+		$date1 = mysqli_real_escape_string($link, $_POST["dateTo"]);
+		$time = mysqli_real_escape_string($link, $_POST["time1"]);
+		$time1 = mysqli_real_escape_string($link, $_POST["time2"]);
+		$message = mysqli_real_escape_string($link, $_POST["message"]);
+	   
+	
+				 $insert = "insert into appointment(fName, email, phone, service, dateFrom, dateTo, time1, time2, message, date_added)
+				 values('$fullName', '$email', '$mobile', '$service', '$date', '$date1', '$time','$time1', '$message', now())";
+				 $run_insert = mysqli_query($link, $insert);
+				 if($run_insert){
+					echo "<script>alert('Your booking information has been received. Our representative will contact you shortly for confirmation. Thanks.')</script>";	
+					echo "<script>window.open('index.php', '_self')</script>";			           
+				 }	
+		}
+	  
+ }
+?> 
